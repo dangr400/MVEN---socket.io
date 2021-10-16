@@ -1,7 +1,7 @@
 const config = require("../config/auth.config");
 const db = require("../models");
-const User = db.user;
-const Role = db.role;
+const User = db.usuario;
+const Rol = db.rol;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -20,7 +20,7 @@ exports.signup = (req, res) => {
     }
 
     if (req.body.roles) {
-      Role.find(
+      Rol.find(
         {
           name: { $in: req.body.roles }
         },
@@ -42,7 +42,7 @@ exports.signup = (req, res) => {
         }
       );
     } else {
-      Role.findOne({ name: "user" }, (err, role) => {
+      Rol.findOne({ name: "user" }, (err, role) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
